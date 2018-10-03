@@ -1,9 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { shallow } from 'enzyme';
+import { App } from './App';
+import AddSpace from './components/AddSpace';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('Root App', () => {
+
+  it('renders without crashing', () => {
+    shallow(<App />)
+    expect(1).toEqual(1)
+  });
+
+  it('renders the add space form with the proper view set', () => {
+    const app = shallow(<App view="addSpace" />)
+    expect(app.find(AddSpace)).toHaveLength(1)
+  })
+
+})
