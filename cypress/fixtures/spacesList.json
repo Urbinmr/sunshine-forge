@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Madame Bovary",
+    "memory_quotamb": 30,
+    "disk_quotamb": 15
+  },
+  {
+    "name": "Moby Dick",
+    "memory_quotamb": 35,
+    "disk_quotamb": 10
+  }
+]

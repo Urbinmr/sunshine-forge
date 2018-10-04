@@ -4,15 +4,25 @@ import { connect } from 'react-redux';
 import './App.css';
 import Sidebar from './components/Sidebar'
 import AddSpace from './components/AddSpace'
+import SpaceDetails from './components/SpaceDetails'
 
 export class App extends Component {
 
   render() {
-    const renderAddForm = () => this.props.view === 'addSpace' ? <AddSpace /> : <div class="main"></div>
+    const renderMain = () => {
+      switch (this.props.view) {
+        case 'addSpace':
+          return <AddSpace />
+        case 'details':
+          return <SpaceDetails />
+        default:
+          return <div className="main" />
+      }
+    }
     return (
       <div className="app">
         <Sidebar />
-        {renderAddForm()}
+        {renderMain()}
       </div>
     )
   }

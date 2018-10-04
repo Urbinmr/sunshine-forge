@@ -27,3 +27,25 @@ ul {
 li {
   align-self: start;
 }
+
+h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+.spaceItem {
+  color: #113399;
+
+}
+
+.spaceDetails dt {
+  font-weight: bold;
+}
+
+.spaceDetails dd {
+  margin-left: 0;
+}
+
+.fa {
+  align-self: flex-end;
+  color: #113399;
+}

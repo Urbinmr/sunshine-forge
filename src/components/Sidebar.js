@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setView } from '../redux/action'
+import { setView, fetchSpaces } from '../redux/action'
 
 export class Sidebar extends Component {
+    componentDidMount = async () => {
+        await this.props.fetchSpaces()
+    }
+
     render() {
         return (
             <div className="sidebar">
                 <ul>
                     {this.props.spaces.map((space, index) => {
-                        return <li className="spaceItem" key={index}>{space.name} {space.memory} {space.disk}</li>
+                        return <li className="spaceItem" key={index} onClick={() => this.props.viewDetails(space)}>
+                            {space.name} 0%
+                        </li>
                     })}
                 </ul>
-                <button id="showAddSpace" onClick={() => { this.props.showAddSpace('addSpace') }}> Add Space</button >
+                <button id="showAddSpace" onClick={this.props.showAddSpace}> Add Space</button >
             </div>
         )
     }
@@ -21,7 +27,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return { showAddSpace: (view) => dispatch(setView(view)) }
+    return {
+        showAddSpace: () => dispatch(setView('addSpace')),
+        fetchSpaces: () => dispatch(fetchSpaces()),
+        viewDetails: (space) => dispatch(setView('details', space)),
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
