@@ -5,6 +5,8 @@ import './App.css';
 import Sidebar from './components/Sidebar'
 import AddSpace from './components/AddSpace'
 import SpaceDetails from './components/SpaceDetails'
+import AddApp from './components/AddApp'
+//import AppDetails from './components/AppDetails'
 
 export class App extends Component {
 
@@ -13,7 +15,9 @@ export class App extends Component {
       switch (this.props.view) {
         case 'addSpace':
           return <AddSpace />
-        case 'details':
+        case 'addApp':
+          return <AddApp />
+        case 'spaceDetails':
           return <SpaceDetails />
         default:
           return <div className="main" />

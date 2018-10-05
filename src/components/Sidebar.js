@@ -28,9 +28,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        showAddSpace: () => dispatch(setView('addSpace')),
+        showAddSpace: () => dispatch(setView('addSpace', null)),
         fetchSpaces: () => dispatch(fetchSpaces()),
-        viewDetails: (space) => dispatch(setView('details', space)),
+        viewDetails: (space) => dispatch(setView('spaceDetails', space)),
     }
 }
 

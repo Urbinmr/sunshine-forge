@@ -1,9 +1,10 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from 'react'
+import { shallow } from 'enzyme'
 import { expect } from 'chai'
-import { App } from './App';
-import AddSpace from './components/AddSpace';
-import SpaceDetails from './components/SpaceDetails';
+import { App } from './App'
+import AddSpace from './components/AddSpace'
+import SpaceDetails from './components/SpaceDetails'
+import AddApp from './components/AddApp'
 
 describe('Root App', () => {
 
@@ -18,8 +19,13 @@ describe('Root App', () => {
   })
 
   it('should render space details when space item is clicked', () => {
-    const app = shallow(<App view="details" selectedSpace="1" />)
+    const app = shallow(<App view="spaceDetails" selectedSpace="1" />)
     expect(app.find(SpaceDetails)).to.have.length(1)
+  })
+
+  it('should render an add app form', () => {
+    const app = shallow(<App view="addApp" selectedSpace={{}} />)
+    expect(app.find(AddApp)).to.have.length(1)
   })
 
 })

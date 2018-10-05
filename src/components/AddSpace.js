@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { postSpace, setView } from '../redux/action'
+import { addSpace, setView, editSpace } from '../redux/action'
 
 export class AddSpace extends Component {
     constructor(props) {
@@ -16,9 +16,17 @@ export class AddSpace extends Component {
         }
     }
 
-    handleCreateSpace = () => {
+    setProcessing = () => {
         this.setState({ processing: true })
-        this.props.postSpace(this.state.space)
+        setTimeout(this.setState({ processing: false }), 4000)
+    }
+    handleAddSpace = () => {
+        this.setProcessing()
+        this.props.addSpace(this.state.space)
+    }
+    handleEditSpace = () => {
+        this.setProcessing()
+        this.props.editSpace(this.state.space)
     }
 
     handleChange = (event) => {
@@ -28,8 +36,8 @@ export class AddSpace extends Component {
     render() {
         const editMode = Boolean(this.props.selectedSpace)
         const renderActionButton = () => {
-            const id = editMode ? 'editSpace' : 'createSpace'
-            const handler = editMode ? this.handleEditSpace : this.handleCreateSpace
+            const id = editMode ? 'editSpace' : 'addSpace'
+            const handler = editMode ? this.handleEditSpace : this.handleAddSpace
             const buttonText = editMode ? 'Update' : 'Create'
             return this.state.processing
                 ? <button id={id} disabled="disabled" onClick={handler}>{buttonText}</button>
@@ -48,11 +56,11 @@ export class AddSpace extends Component {
                 </div>
                 <div>
                     Memory:
-                    <input onChange={this.handleChange} value={space.memory_quotamb} id="memory" name="memory_quotamb" type="text" />
+                    <input onChange={this.handleChange} value={space.memory_quotamb} id="memory" name="memory_quotamb" type="number" step="1" />
                 </div>
                 <div>
                     Disk:
-                    <input onChange={this.handleChange} value={space.disk_quotamb} id="disk" name="disk_quotamb" type="text" />
+                    <input onChange={this.handleChange} value={space.disk_quotamb} id="disk" name="disk_quotamb" type="number" step="1" />
                 </div>
                 {renderActionButton()}
                 {renderCancelButton()}
@@ -67,8 +75,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        postSpace: (space) => dispatch(postSpace(space)),
-        cancelEdit: () => dispatch(setView('details'))
+        addSpace: (space) => dispatch(addSpace(space)),
+        cancelEdit: () => dispatch(setView('spaceDetails')),
+        editSpace: (space) => dispatch(editSpace(space))
     }
 }
 
